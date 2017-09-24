@@ -11,18 +11,71 @@ import UIKit
 class ViewController: UIViewController {
     
     var numberondisplay:Double = 0;
+    var othernumber : Double = 0;
+    var oprator : String = ""
     
     @IBOutlet weak var label: UILabel!
     
     @IBAction func numbers(_ sender: UIButton)
     {
-        label.text = label.text! + String(sender.tag-1)
-        numberondisplay = Double(label.text!)!
+        
+        if label.text == "+"{
+            label.text = String(sender.tag)
+        }
+        else if label.text == "-"{
+            label.text = String(sender.tag)
+        }
+        else if label.text == "x"{
+            label.text = String(sender.tag)
+        }
+        else if label.text == "÷"{
+            label.text = String(sender.tag)
+        }
+        else {
+            label.text = label.text! + String(sender.tag)
+        }
         
     }
     
     @IBAction func operations(_ sender: UIButton)
     {
+        if label.text != ""
+        {
+            if sender.tag == 12{
+                numberondisplay = Double(label.text!)!
+                oprator = "÷"
+                label.text = "÷"
+            }
+            else if sender.tag == 13{
+                numberondisplay = Double(label.text!)!
+                oprator = "x"
+                label.text = "x"
+            }
+            else if sender.tag == 14{
+                numberondisplay = Double(label.text!)!
+                oprator = "-"
+                label.text = "-"
+            }
+            else if sender.tag == 15{
+                numberondisplay = Double(label.text!)!
+                oprator = "+"
+                label.text = "+"
+            }
+            else if sender.tag == 11{
+                numberondisplay = 0
+                othernumber = 0
+                oprator = ""
+                label.text = ""
+            }
+            else if sender.tag == 16{
+                if numberondisplay != 0{
+                    othernumber = Double(label.text!)!
+                }
+            }
+        
+        }
+        
+        
         
     }
     
