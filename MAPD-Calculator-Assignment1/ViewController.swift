@@ -13,26 +13,54 @@ class ViewController: UIViewController {
     var numberondisplay:Double = 0;
     var othernumber : Double = 0;
     var oprator : String = ""
+    var result : Double = 0;
     
     @IBOutlet weak var label: UILabel!
     
     @IBAction func numbers(_ sender: UIButton)
     {
-        
-        if label.text == "+"{
-            label.text = String(sender.tag)
+        if result == 0
+        {
+            if label.text == "+"{
+                label.text = String(sender.tag)
+            }
+            else if label.text == "-"{
+                label.text = String(sender.tag)
+            }
+            else if label.text == "x"{
+                label.text = String(sender.tag)
+            }
+            else if label.text == "÷"{
+                label.text = String(sender.tag)
+            }
+            else {
+                label.text = label.text! + String(sender.tag)
+            }
+            
         }
-        else if label.text == "-"{
-            label.text = String(sender.tag)
-        }
-        else if label.text == "x"{
-            label.text = String(sender.tag)
-        }
-        else if label.text == "÷"{
-            label.text = String(sender.tag)
-        }
-        else {
-            label.text = label.text! + String(sender.tag)
+        else  {
+            label.text = ""
+            result = 0;
+            numberondisplay = 0;
+            othernumber = 0;
+            oprator = ""
+            
+            if label.text == "+"{
+                label.text = String(sender.tag)
+            }
+            else if label.text == "-"{
+                label.text = String(sender.tag)
+            }
+            else if label.text == "x"{
+                label.text = String(sender.tag)
+            }
+            else if label.text == "÷"{
+                label.text = String(sender.tag)
+            }
+            else {
+                label.text = label.text! + String(sender.tag)
+            }
+            
         }
         
     }
@@ -70,6 +98,25 @@ class ViewController: UIViewController {
             else if sender.tag == 16{
                 if numberondisplay != 0{
                     othernumber = Double(label.text!)!
+                    if oprator == "+"{
+                        result = numberondisplay + othernumber
+                        label.text = String(result)
+                        }
+                    else if oprator == "-"{
+                        result = numberondisplay - othernumber
+                        label.text = String(result)
+                    }
+                    else if oprator == "x"{
+                        result = numberondisplay * othernumber
+                        label.text = String(result)
+                    }
+                    else if oprator == "÷"{
+                        result = numberondisplay / othernumber
+                        label.text = String(result)
+                    }
+                    
+                    
+                    
                 }
             }
         
