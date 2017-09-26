@@ -3,6 +3,13 @@
 //  MAPD-Calculator-Assignment1
 //
 //  Created by Mankiran kaur on 2017-09-21.
+//  ID - 300990016
+//  Date - 26 september 2017
+//  Calculator app contains
+//  Calculator App performing mathematical operations Plus,Minus,Multily,Divide and Equals button to perform simple math with integer and floating point numbers.
+//  Label is used to store and display the result of the calculations.
+//  Also reset button is used to reset the result field that is label back to zero.
+//
 //  Copyright © 2017 Centennial College. All rights reserved.
 //
 
@@ -19,6 +26,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var label: UILabel!
     
+    //function containing all numbers 0 to 9 //----
     @IBAction func numbers(_ sender: UIButton)
     {
         if result == 0
@@ -35,13 +43,14 @@ class ViewController: UIViewController {
             else if label.text == "÷"   {
                 label.text = String(sender.tag)
             }
-            else {
+                
+            else {                                                      //checking the decimal after zero//
                 if label.text == String(0)  {
                     if sender.tag == 17{
                         if decimalflag == false {
                             label.text = "0."
-                            decimalflag = true
-                        }
+                            decimalflag = true                          // if there is decimal after zero then turning the flag true //
+                        }                                               // so that if user again adds decimal, it would not add//
                     }
                     else    {
                         
@@ -52,8 +61,8 @@ class ViewController: UIViewController {
                 else    {
                     if(sender.tag == 17)    {
                         if decimalflag == false {
-                            label.text = label.text! + "."
-                            decimalflag = true
+                            label.text = label.text! + "."              // adding decimal after number and storing in label //
+                            decimalflag = true                          // after adding decimal, setting the flag value true so that decimal cannot be added again//
                         }
                     }
                     else    {
@@ -109,72 +118,78 @@ class ViewController: UIViewController {
         }
     }
     
+    // function performing all operations  //
     @IBAction func operations(_ sender: UIButton)
     {
-        //if label.text != ""
-       // {
-            if sender.tag == 12 {                    //divide
-                numberondisplay = Double(label.text!)!
+        
+            if sender.tag == 12 {                       //divide button
+                numberondisplay = Double(label.text!)!  // storing the first number in the variable numberondisplay//
                 oprator = "÷"
                 label.text = "÷"
                 decimalflag = false
             }
-            else if sender.tag == 13    {
-                numberondisplay = Double(label.text!)!
+            else if sender.tag == 13    {               //multily button
+                numberondisplay = Double(label.text!)!  // storing the first number in the variable numberondisplay//
                 oprator = "x"
                 label.text = "x"
                 decimalflag = false
             }
-            else if sender.tag == 14    {               //minus
-                numberondisplay = Double(label.text!)!
+            else if sender.tag == 14    {               //minus button
+                numberondisplay = Double(label.text!)!  // storing the first number in the variable numberondisplay//
                 oprator = "-"
                 label.text = "-"
                 decimalflag = false
                 
             }
-            else if sender.tag == 15    {               // plus
-                numberondisplay = Double(label.text!)!
+            else if sender.tag == 15    {               // plus button
+                numberondisplay = Double(label.text!)!  // storing the first number in the variable numberondisplay//
                 oprator = "+"
                 label.text = "+"
                 decimalflag = false
             }
-            else if sender.tag == 11    {     //clear operation
-                numberondisplay = 0
+            else if sender.tag == 11    {               //clear button
+                numberondisplay = 0                     // when the user clicks on the equals too button then the result showing in label sets to zero//
                 othernumber = 0
                 oprator = ""
                 label.text = "0"
-                decimalflag = false
+                decimalflag = false                     //setting the decimal flag false again//
             }
-            else if sender.tag == 16
+            else if sender.tag == 16                    // Equals operation
             {
+                // when the user presses equals button then if the numberondisplay(i.e. first number) is not equal to zero and other number(second number) pressed after the operator(any operation i.e + ,_ ,x ,÷) , then the result get stored in a variable result. And then the result is stored in label field to show the result to the user.//
+                
                 if numberondisplay != 0
                 {
-                    othernumber = Double(label.text!)!
+                    othernumber = Double(label.text!)!                                  // storing the second number in variable othrnumber//
                     print("numberonDisplay - \(numberondisplay)")
                     print("othernumber- \(othernumber)")
-                    if oprator == "+"{
-                        result = numberondisplay + othernumber
-                        label.text = String(result)
+                    
+                     // performing the plus operation//
+                    if oprator == "+"{                                                // if operator is "+" that is pressed by the user//
+                        result = numberondisplay + othernumber                        // then adds the first and second number and storing answer in variable result//
+                        label.text = String(result)                                   // then storing and displaying the result in the label field//
+                        
                     }
-                    else if oprator == "-"{
-                        result = numberondisplay - othernumber
-                        label.text = String(result)
+                        // performing the Subtraction operation //
+                    else if oprator == "-"{                                           // if operator is "-" that is pressed by the user//
+                        result = numberondisplay - othernumber                        // then subtracts second number from first number and store answer in variable result
+                        label.text = String(result)                                   // then storing and displaying the result in the label field//
                     }
-                    else if oprator == "x"{
-                        result = numberondisplay * othernumber
-                        label.text = String(result)
+                        
+                        // performing the MULTILPLY operation//
+                    else if oprator == "x"{                                           // if operator is "x" that is pressed by the user//
+                        result = numberondisplay * othernumber                        // then multilies the first and second number and stores answer in variable result//
+                        label.text = String(result)                                   // then storing and displaying the result in the label field//
                     }
-                    else if oprator == "÷"{
-                        result = numberondisplay / othernumber
-                        label.text = String(result)
+                        // performing the divide operation //
+                    else if oprator == "÷"{                                           // if operator is "÷" that is pressed by the user//
+                        result = numberondisplay / othernumber                        // divides the first number by second number and stores answer in variable result//
+                        label.text = String(result)                                   // then storing and displaying the result in the label field//
                     }
                     numberondisplay = result
-                   // print(numberondisplay)
                 }
                 
             }
-        
-        //}
         
     }
     
