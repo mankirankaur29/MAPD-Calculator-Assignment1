@@ -1,7 +1,7 @@
 //
 //  ViewController.swift
-//  MAPD-Calculator-Assignment1
 //
+//  MAPD-Calculator-Assignment1
 //  Created by Mankiran kaur on 2017-09-21.
 //  ID - 300990016
 //  Date - 26 september 2017
@@ -10,6 +10,8 @@
 //  Label is used to store and display the result of the calculations.
 //  Also reset button is used to reset the result field that is label back to zero.
 //
+//  Added Splash Screen 
+//
 //  Copyright © 2017 Centennial College. All rights reserved.
 //
 
@@ -17,19 +19,21 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var numberondisplay:Double = 0;
-    var othernumber : Double = 0;
-    var oprator : String = ""
-    var result : Double = 0;
-    var decimalflag: Bool = false
+    //------------------variables---------------//
+    var numberondisplay:Double = 0;                              //variable for first number//
+    var othernumber : Double = 0;                                //variable for second number//
+    var oprator : String = ""                                    //variable for storing operations(+ , -, x , ÷)//
+    var result : Double = 0;                                     // variable for storing the result of the calculation//
+    var decimalflag: Bool = false                                //variable for setting the decimal value//
+    
     
     
     @IBOutlet weak var label: UILabel!
     
-    //function containing all numbers 0 to 9 //----
+    //------------------ Action function containing all numbers 0 to 9 ------------------//
     @IBAction func numbers(_ sender: UIButton)
     {
-        if result == 0
+        if result == 0                                              // applying if condition to check if the result is zero then do further operations//
         {
             if label.text == "+"    {
                 label.text = String(sender.tag)
@@ -47,10 +51,10 @@ class ViewController: UIViewController {
             else {                                                      //checking the decimal after zero//
                 if label.text == String(0)  {
                     if sender.tag == 17{
-                        if decimalflag == false {
-                            label.text = "0."
-                            decimalflag = true                          // if there is decimal after zero then turning the flag true //
-                        }                                               // so that if user again adds decimal, it would not add//
+                        if decimalflag == false {                       // applying if condition for decimalflag value is false then do further operation//
+                            label.text = "0."                           // if there is decimal after zero then turning the flag true //
+                            decimalflag = true                          // so that if user again adds decimal, it would not add//
+                        }
                     }
                     else    {
                         
@@ -60,7 +64,7 @@ class ViewController: UIViewController {
                 }
                 else    {
                     if(sender.tag == 17)    {
-                        if decimalflag == false {
+                        if decimalflag == false {                       // applying if condition for decimalflag value is false then do further operation//
                             label.text = label.text! + "."              // adding decimal after number and storing in label //
                             decimalflag = true                          // after adding decimal, setting the flag value true so that decimal cannot be added again//
                         }
@@ -118,35 +122,47 @@ class ViewController: UIViewController {
         }
     }
     
-    // function performing all operations  //
+    //----------------- Action function performing mathematical operations ( + , -, x, ÷ , = ) -----------------//
     @IBAction func operations(_ sender: UIButton)
     {
+        // 12 = "÷"
+        // 13 = "x"
+        // 14 = "-"
+        // 15 = "+"
+        // 16 = "="
         
             if sender.tag == 12 {                       //divide button
-                numberondisplay = Double(label.text!)!  // storing the first number in the variable numberondisplay//
+                numberondisplay = Double(label.text!)!
                 oprator = "÷"
                 label.text = "÷"
                 decimalflag = false
             }
             else if sender.tag == 13    {               //multily button
-                numberondisplay = Double(label.text!)!  // storing the first number in the variable numberondisplay//
+                numberondisplay = Double(label.text!)!
                 oprator = "x"
                 label.text = "x"
                 decimalflag = false
             }
             else if sender.tag == 14    {               //minus button
-                numberondisplay = Double(label.text!)!  // storing the first number in the variable numberondisplay//
+                numberondisplay = Double(label.text!)!
                 oprator = "-"
                 label.text = "-"
                 decimalflag = false
                 
             }
             else if sender.tag == 15    {               // plus button
-                numberondisplay = Double(label.text!)!  // storing the first number in the variable numberondisplay//
+                numberondisplay = Double(label.text!)!
                 oprator = "+"
                 label.text = "+"
                 decimalflag = false
             }
+            else if sender.tag == 10    {
+                numberondisplay = Double(label.text!)!
+                oprator = "%"
+                label.text = "%"
+                decimalflag = false
+            }
+        
             else if sender.tag == 11    {               //clear button
                 numberondisplay = 0                     // when the user clicks on the equals too button then the result showing in label sets to zero//
                 othernumber = 0
@@ -156,43 +172,47 @@ class ViewController: UIViewController {
             }
             else if sender.tag == 16                    // Equals operation
             {
-                // when the user presses equals button then if the numberondisplay(i.e. first number) is not equal to zero and other number(second number) pressed after the operator(any operation i.e + ,_ ,x ,÷) , then the result get stored in a variable result. And then the result is stored in label field to show the result to the user.//
+                // when the user presses equals button then if the numberondisplay(i.e. first number) is not equal to zero and other number(second number) pressed after the operator(any operator i.e + ,_ ,x ,÷) , then the result get stored in a variable result. And then the result is displayed in label field to show the result to the user.//
                 
-                if numberondisplay != 0
-                {
+               
                     othernumber = Double(label.text!)!                                  // storing the second number in variable othrnumber//
                     print("numberonDisplay - \(numberondisplay)")
                     print("othernumber- \(othernumber)")
                     
-                     // performing the plus operation//
+                    //-- performing the Plus operation --//
                     if oprator == "+"{                                                // if operator is "+" that is pressed by the user//
-                        result = numberondisplay + othernumber                        // then adds the first and second number and storing answer in variable result//
-                        label.text = String(result)                                   // then storing and displaying the result in the label field//
-                        
+                        result = numberondisplay + othernumber                        // adds the numbers and store answer in result and then displays in label//
+                        label.text = String(result)
                     }
-                        // performing the Subtraction operation //
+                        
+                    //-- performing the Subtraction operation --//
                     else if oprator == "-"{                                           // if operator is "-" that is pressed by the user//
-                        result = numberondisplay - othernumber                        // then subtracts second number from first number and store answer in variable result
-                        label.text = String(result)                                   // then storing and displaying the result in the label field//
+                        result = numberondisplay - othernumber                        //subtracts the numbers and store answer in result and then displays in label//
+                        label.text = String(result)
                     }
                         
-                        // performing the MULTILPLY operation//
+                    //-- performing the MULTILPLY operation --//
                     else if oprator == "x"{                                           // if operator is "x" that is pressed by the user//
-                        result = numberondisplay * othernumber                        // then multilies the first and second number and stores answer in variable result//
-                        label.text = String(result)                                   // then storing and displaying the result in the label field//
+                        result = numberondisplay * othernumber                        //multilies the numbers and store answer in result and then displays in label//
+                        label.text = String(result)
                     }
-                        // performing the divide operation //
+                        
+                    //-- performing the Divide operation --//
                     else if oprator == "÷"{                                           // if operator is "÷" that is pressed by the user//
-                        result = numberondisplay / othernumber                        // divides the first number by second number and stores answer in variable result//
-                        label.text = String(result)                                   // then storing and displaying the result in the label field//
+                        if othernumber == 0 {                                         // checking of other number is zero then shows error//
+                            label.text = String("Error");
+                        }
+                        else    {
+                            result = numberondisplay / othernumber                     // perform the division and stores answer in result and displays in label//
+                            label.text = String(result)
+                        }
+            
                     }
                     numberondisplay = result
-                }
                 
             }
         
     }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
